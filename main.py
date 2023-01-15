@@ -28,3 +28,20 @@ def clearAnswerEntryLabel():
     answerLabelForSquareRoot = answerLabelForSquareRoot
     answerVariableGlobal = ""
     answerEntryLabel.set(answerVariableGlobal)
+
+def evaluateSquareRoot():
+    global answerVariableGlobal
+    global answerLabelForSquareRoot
+
+    try:
+        sqrtAnswer = math.sqrt(eval(str(answerLabelForSquareRoot)))
+        clearAnswerEntryLabel()
+        answerFinalLabel.set(sqrtAnswer)
+    except (ValueError, SyntaxError, TypeError, ZeroDivisionError):
+        try:
+            sqrtAnswer = math.sqrt(eval(str(answerLabelForSquareRoot)))
+            clearAnswerEntryLabel()
+            answerFinalLabel.set(sqrtAnswer)
+        except (ValueError, SyntaxError, TypeError, ZeroDivisionError):
+            clearAnswerEntryLabel()
+            answerFinalLabel.set("Error!")
