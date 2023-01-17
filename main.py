@@ -37,11 +37,51 @@ def evaluateSquareRoot():
         sqrtAnswer = math.sqrt(eval(str(answerLabelForSquareRoot)))
         clearAnswerEntryLabel()
         answerFinalLabel.set(sqrtAnswer)
+
     except (ValueError, SyntaxError, TypeError, ZeroDivisionError):
         try:
             sqrtAnswer = math.sqrt(eval(str(answerLabelForSquareRoot)))
             clearAnswerEntryLabel()
             answerFinalLabel.set(sqrtAnswer)
+
         except (ValueError, SyntaxError, TypeError, ZeroDivisionError):
             clearAnswerEntryLabel()
             answerFinalLabel.set("Error!")
+
+def evaluateAnswer():
+    global answerVariableGlobal
+
+    try:
+        eval(answerVariableGlobal)
+        evaluatedValueAnswerLabelGlobal = str(eval(answerVariableGlobal))
+        clearAnswerEntryLabel()
+        answerFinalLabel.set(evaluatedValueAnswerLabelGlobal)
+    
+    except (ValueError, SyntaxError, TypeError, ZeroDivisionError):
+        clearAnswerEntryLabel()
+        answerFinalLabel.set("Error!")
+
+def allClear():
+    global answerVariableGlobal
+    global answerLabelForSquareRoot
+
+    answerVariableGlobal = ""
+    answerLabelForSquareRoot = ""
+    answerEntryLabel.set("")
+    answerFinalLabel.set("")
+
+def createButton(txt, x, y):
+    Button(root, font=('futura', 15, 'bold'),
+        padx=16, pady= 16, text=str(txt),
+        command=lambda: changeAnswerEntryLabel(txt),
+        height=2, width=9).grid(row=x, column=y, sticky=E)
+
+buttons = ['AC', '', '%', '/', '7', '8', '9', '*', '4',
+        '5', '6', '-', '1', '2', '3', '+', '', '', '.', '']
+
+buttonsListTraversalCounter = 0
+
+for i in range(3, 8):
+    for j in range(0, 4):
+        createButton(buttons[buttonsListTraversalCounter], i, j)
+        buttonsListTraversalCounter = buttonsListTraversalCounter + 1
